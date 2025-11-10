@@ -28,10 +28,10 @@ const CategoryCards = () => {
   const data3 = use(dataPromise3);
   const data4 = use(dataPromise4);
   return (
-    <div className="grid grid-cols-4 gap-3 max-w-11/12 mx-auto my-14">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-11/12 mx-auto my-14">
       <StyledWrapper>
-        <div className="card">
-            <img className="w-[300px] h-[150px]" src={data1.image} alt="" />
+        <div className="card hover:cursor-pointer">
+            <img className="w-[300px] mx-auto md:w-[300px] h-[150px]" src={data1.image} alt="" />
           <p className="card-title">{data1.title}</p>
           <p className="small-desc">
             {data1.description}
@@ -40,8 +40,8 @@ const CategoryCards = () => {
       </StyledWrapper>
 
       <StyledWrapper>
-        <div className="card">
-        <img className="w-[300px] h-[150px]" src={data2.image} alt="" />
+        <div className="card hover:cursor-pointer">
+        <img className="w-[300px] mx-auto md:w-[300px] h-[150px]" src={data2.image} alt="" />
           <p className="card-title">{data2.title}</p>
           <p className="small-desc">
             {data2.description}
@@ -50,8 +50,8 @@ const CategoryCards = () => {
       </StyledWrapper>
 
       <StyledWrapper>
-        <div className="card">
-        <img className="w-[300px] h-[150px]" src={data3.image} alt="" />
+        <div className="card hover:cursor-pointer">
+        <img className="w-[300px] mx-auto md:w-[300px] h-[150px]" src={data3.image} alt="" />
           <p className="card-title">{data3.title}</p>
           <p className="small-desc">
             {data3.description}
@@ -60,8 +60,8 @@ const CategoryCards = () => {
       </StyledWrapper>
 
       <StyledWrapper>
-        <div className="card">
-        <img className="w-[300px] h-[150px]" src={data4.image} alt="" />
+        <div className="card hover:cursor-pointer">
+        <img className="w-[300px] mx-auto md:w-[300px] h-[150px]" src={data4.image} alt="" />
           <p className="card-title">{data4.title}</p>
           <p className="small-desc">
             {data4.description}

@@ -30,17 +30,17 @@ const Home = () => {
           className="mySwiper">
           <SwiperSlide>
             <img
-              className="w-full h-24 lg:h-96 object-cover rounded-xl"
+              className="w-full h-32 md:h-56 lg:h-96 object-cover rounded-xl"
               src={garbageIssue}
               alt=""
             />
 
             <div className="absolute top-0 bg-black/50 w-6/12 h-full rounded-xl rounded-r-none flex flex-col justify-center items-center text-white"></div>
-            <div className="absolute top-6/12 w-full text-center text-white">
-              <h1 className="text-xl md:text-3xl font-semibold mb-2">
+            <div className="absolute top-3/12 md:top-4/12 lg:top-6/12 w-full text-center text-white">
+              <h1 className="text-[10px] md:text-xl lg:text-3xl font-semibold mb-2">
                 More than 430 million tons of plastic are produced each year
               </h1>
-              <p className="text-sm md:text-sm w-[300px] md:w-8/12 text-center mx-auto">
+              <p className="text-[10px] md:text-[10px] lg:text-sm md:w-8/12 text-center mx-auto">
                 If plastic production stays on its current trajectory, by 2030,
                 greenhouse gas emissions from plastic could reach 1.34 billion
                 tons per year.
@@ -49,17 +49,17 @@ const Home = () => {
           </SwiperSlide>
           <SwiperSlide>
             <img
-              className="relative w-full h-24 lg:h-96 object-cover rounded-xl"
+              className="relative w-full h-32 md:h-56 lg:h-96 object-cover rounded-xl"
               src={cleaning}
               alt=""
             />
 
             <div className="absolute top-0 bg-black/50 w-6/12 h-full rounded-xl rounded-r-none flex flex-col justify-center items-center text-white"></div>
-            <div className="absolute top-6/12 w-full text-center text-white">
-              <h1 className="text-xl md:text-3xl font-semibold mb-2">
+            <div className="absolute top-3/12 md:top-4/12 lg:top-6/12 w-full text-center text-white">
+              <h1 className="text-[10px] md:text-xl lg:text-3xl font-semibold mb-2">
                 Join Hands for a Cleaner, Greener Community
               </h1>
-              <p className="text-sm md:text-sm w-[300px] md:w-8/12 text-center mx-auto">
+              <p className="text-[10px] md:text-[10px] lg:text-sm md:w-8/12 text-center mx-auto">
                 Together we can make a difference! Be part of our community
                 cleaning movement to create a healthier, more sustainable
                 environment for everyone.
@@ -68,17 +68,17 @@ const Home = () => {
           </SwiperSlide>
           <SwiperSlide>
             <img
-              className="relative w-full h-24 lg:h-96 object-cover rounded-xl"
+              className="relative w-full h-32 md:h-56 lg:h-96 object-cover rounded-xl"
               src={actions}
               alt=""
             />
 
             <div className="absolute top-0 bg-black/50 w-6/12 h-full rounded-xl rounded-r-none flex flex-col justify-center items-center text-white"></div>
-            <div className="absolute top-6/12 w-full text-center text-white">
-              <h1 className="text-xl md:text-3xl font-semibold mb-2">
+            <div className="absolute top-3/12 md:top-4/12 lg:top-6/12 w-full text-center text-white">
+              <h1 className="text-[10px] md:text-xl lg:text-3xl font-semibold mb-2">
                 Take Action for a Sustainable Future
               </h1>
-              <p className="text-sm md:text-sm w-[300px] md:w-8/12 text-center mx-auto">
+              <p className="text-[10px] md:text-[10px] lg:text-sm md:w-8/12 text-center mx-auto">
                 Every small step counts. Join our sustainability mission to
                 protect the planet, conserve resources, and inspire positive
                 change in your community.
@@ -92,7 +92,7 @@ const Home = () => {
         <CategoryCards></CategoryCards>
       </div>
 
-      <div className="grid grid-cols-3 gap-6 max-w-11/12 mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-11/12 mx-auto">
         {issues.map((issue) => (
           <IssuesCard key={issue._id} issue={issue}></IssuesCard>
         ))}
