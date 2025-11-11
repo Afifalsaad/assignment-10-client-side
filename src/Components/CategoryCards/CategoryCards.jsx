@@ -1,73 +1,32 @@
 import React, { use } from "react";
 import styled from "styled-components";
 
-const dataPromise1 = fetch("http://localhost:3000/garbage")
+const dataPromise = fetch("http://localhost:3000/categoryCards")
   .then((res) => res.json())
   .then((data) => {
-    return data;
-  });
-const dataPromise2 = fetch("http://localhost:3000/illegalConstruction")
-  .then((res) => res.json())
-  .then((data) => {
-    return data;
-  });
-const dataPromise3 = fetch("http://localhost:3000/brokenPublicProperty")
-  .then((res) => res.json())
-  .then((data) => {
-    return data;
-  });
-const dataPromise4 = fetch("http://localhost:3000/roadDamage")
-  .then((res) => res.json())
-  .then((data) => {
+    console.log(data);
     return data;
   });
 
 const CategoryCards = () => {
-  const data1 = use(dataPromise1);
-  const data2 = use(dataPromise2);
-  const data3 = use(dataPromise3);
-  const data4 = use(dataPromise4);
+  const data1 = use(dataPromise);
+  console.log(data1);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-11/12 mx-auto my-14">
-      <StyledWrapper>
-        <div className="card hover:cursor-pointer">
-            <img className="w-[300px] mx-auto md:w-[300px] h-[150px]" src={data1.image} alt="" />
-          <p className="card-title">{data1.title}</p>
-          <p className="small-desc">
-            {data1.description}
-          </p>
-        </div>
-      </StyledWrapper>
-
-      <StyledWrapper>
-        <div className="card hover:cursor-pointer">
-        <img className="w-[300px] mx-auto md:w-[300px] h-[150px]" src={data2.image} alt="" />
-          <p className="card-title">{data2.title}</p>
-          <p className="small-desc">
-            {data2.description}
-          </p>
-        </div>
-      </StyledWrapper>
-
-      <StyledWrapper>
-        <div className="card hover:cursor-pointer">
-        <img className="w-[300px] mx-auto md:w-[300px] h-[150px]" src={data3.image} alt="" />
-          <p className="card-title">{data3.title}</p>
-          <p className="small-desc">
-            {data3.description}
-          </p>
-        </div>
-      </StyledWrapper>
-
-      <StyledWrapper>
-        <div className="card hover:cursor-pointer">
-        <img className="w-[300px] mx-auto md:w-[300px] h-[150px]" src={data4.image} alt="" />
-          <p className="card-title">{data4.title}</p>
-          <p className="small-desc">
-            {data4.description}
-          </p>
-        </div>
-      </StyledWrapper>
+      {data1.map((d) => (
+        <StyledWrapper>
+          <h1 className="text-center">{d.category}</h1>
+          <div className="card hover:cursor-pointer">
+            <img
+              className="w-[300px] mx-auto md:w-[300px] h-[150px]"
+              src={d.image}
+              alt=""
+            />
+            <p className="card-title">{d.title}</p>
+            <p className="small-desc">{d.description}</p>
+          </div>
+        </StyledWrapper>
+      ))}
     </div>
   );
 };
@@ -92,8 +51,6 @@ const StyledWrapper = styled.div`
   .small-desc {
     font-size: 1em;
   }
-
-
 
   .go-arrow {
     margin-top: -4px;

@@ -1,11 +1,24 @@
-import React from "react";
+import React, { use } from "react";
 import icon from "../../assets/icons8-earth-48.png";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = use(AuthContext);
+
+  const handleSignOut = () => {
+    logOut()
+      .then(() => {
+        alert("Logged Out");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
-    <div className="navbar bg-[#95cfcfd8] text-white relative">
-      <div className="navbar-start relative z-10">
+    <div className="flex justify-between py-3 items-center bg-[#95cfcfd8] text-white relative">
+      <div className="flex flex-row relative z-10">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -43,18 +56,46 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="navbar-end">
+      <div className="flex items-center">
         <div className="hidden lg:block">
-          <NavLink className='font-semibold mr-4' to='/'>Home</NavLink>
-          <NavLink className='font-semibold mr-4' to='/issue'>Issue</NavLink>
+          <NavLink className="font-semibold mr-4" to="/">
+            Home
+          </NavLink>
+          <NavLink className="font-semibold mr-4" to="/issue">
+            ALL Issues
+          </NavLink>
+          {user && (
+            <>
+              {" "}
+              <NavLink className="font-semibold mr-4" to="/issue">
+                My Issues
+              </NavLink>
+              <NavLink className="font-semibold mr-4" to="/issue">
+                Add Issue
+              </NavLink>
+              <NavLink className="font-semibold mr-4" to="/issue">
+                My Contribution
+              </NavLink>
+            </>
+          )}
         </div>
 
-        <button className="btn border-none mr-2 bg-green-800 rounded-md py-1 px-6 font-semibold">
-          Login
-        </button>
-        <button className="btn border-none bg-green-800 rounded-md py-1 px-6 font-semibold">
-          Register
-        </button>
+        <div>
+          {user ? (
+            <button onClick={handleSignOut} className="btn border-none mr-2 bg-green-800 rounded-md py-1 px-6 font-semibold">Logout</button>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="btn border-none mr-2 bg-green-800 rounded-md py-1 px-6 font-semibold">Login</Link>
+              <Link
+                to="/register"
+                className="btn border-none bg-green-800 rounded-md py-1 px-6 font-semibold">
+                Register
+              </Link>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

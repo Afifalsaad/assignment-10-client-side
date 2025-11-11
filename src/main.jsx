@@ -6,6 +6,9 @@ import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import Root from "./Components/Root/Root.jsx";
 import Home from "./Components/Home/Home.jsx";
+import Login from "./Components/Pages/Login.jsx";
+import Register from "./Components/Pages/Register.jsx";
+import AuthProvider from "./Provider/AuthProvider.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,12 +20,22 @@ const router = createBrowserRouter([
         Component: Home,
         loader: () => fetch("http://localhost:3000/issues"),
       },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/register",
+        Component: Register,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <AuthProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
   </StrictMode>
 );
