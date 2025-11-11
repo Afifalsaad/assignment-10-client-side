@@ -1,35 +1,37 @@
 import React, { use, useState } from "react";
-import { Link } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import AuthProvider, { AuthContext } from "../../Provider/AuthProvider";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 const Login = () => {
-  const { createUser, googleLogIn , user } = use(AuthContext);
-  const [showPassword, setShowPassword] = useState(true);
+  const { googleLogIn, logIn } = use(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate()
 
   const handleLogin = (e) => {
     e.preventDefault();
 
+    
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
 
-    createUser(email, password)
+    logIn(email, password)
       .then(() => {
-        console.log("Login Successful");
+        alert("Logged In")
+        navigate('/');
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
-    e.target.reset();
   };
 
   const handleGoogleLogin = () => {
     googleLogIn()
-    .then(()=>{
-        console.log('user')
-    })
-    .catch(error=>console.log(error));
+      .then(() => {
+        console.log("user")
+        navigate('/');
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleShowPassword = (e) => {
@@ -42,9 +44,6 @@ const Login = () => {
       <div className="flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left mb-3">
           <h1 className="text-5xl font-bold">Login now!</h1>
-          {
-            user && <h1>User is here</h1>
-          }
         </div>
         <div className="card bg-[#f1fefe] w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
@@ -73,7 +72,7 @@ const Login = () => {
                     type={showPassword ? "text" : "password"}
                     className="input"
                     placeholder="Password"
-                    onFocus='border'
+                    onFocus="border"
                   />
                   <button
                     onClick={handleShowPassword}

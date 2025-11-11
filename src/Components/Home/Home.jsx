@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -10,10 +10,10 @@ import actions from "../../assets/sustainability-actions.jpg";
 import { useLoaderData } from "react-router";
 import IssuesCard from "../IssuesCard/IssuesCard";
 import CategoryCards from "../CategoryCards/CategoryCards";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Home = () => {
   const issues = useLoaderData();
-  console.log(issues);
 
   return (
     <div className="min-h-screen">

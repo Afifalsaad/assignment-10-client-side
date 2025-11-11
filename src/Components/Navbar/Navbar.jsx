@@ -1,10 +1,16 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import icon from "../../assets/icons8-earth-48.png";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
+  console.log(user);
+  const [logout, setLogout] = useState(false);
+
+  const handleLogout = () => {
+    setLogout(!logout);
+  };
 
   const handleSignOut = () => {
     logOut()
@@ -62,7 +68,7 @@ const Navbar = () => {
             Home
           </NavLink>
           <NavLink className="font-semibold mr-4" to="/issue">
-            ALL Issues
+            All Issues
           </NavLink>
           {user && (
             <>
@@ -82,12 +88,32 @@ const Navbar = () => {
 
         <div>
           {user ? (
-            <button onClick={handleSignOut} className="btn border-none mr-2 bg-green-800 rounded-md py-1 px-6 font-semibold">Logout</button>
+            // <button onClick={handleSignOut} className="btn border-none mr-2 bg-green-800 rounded-md py-1 px-6 font-semibold">{user.displayName}</button>
+            <div className="relative flex items-center gap-4 group mr-3">
+              {logout
+                ? ""
+                : <button onClick={handleSignOut} className="bg-sky-950 py-1 px-4 rounded-xl">Logout</button>}
+
+              <button onClick={handleLogout}>
+                <img
+                  className="w-9 h-9 object-cover rounded-full hover:cursor-pointer"
+                  src={user.photoURL || "/default-avatar.png"}
+                  alt="avatar"
+                />
+              </button>
+
+              {/* Tooltip */}
+              {/* <span className="absolute left-1/2 bg-gray-600 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 duration-200 ">
+                {user.displayName}
+              </span> */}
+            </div>
           ) : (
             <>
               <Link
                 to="/login"
-                className="btn border-none mr-2 bg-green-800 rounded-md py-1 px-6 font-semibold">Login</Link>
+                className="btn border-none mr-2 bg-green-800 rounded-md py-1 px-6 font-semibold">
+                Login
+              </Link>
               <Link
                 to="/register"
                 className="btn border-none bg-green-800 rounded-md py-1 px-6 font-semibold">

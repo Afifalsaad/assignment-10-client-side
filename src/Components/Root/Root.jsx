@@ -3,7 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import { Outlet } from "react-router";
 import Footer from "../Footer/Footer";
 import { AuthContext } from "../../Provider/AuthProvider";
-import Loader from "../Loader/Loader";
+import "./root.css";
 
 const Root = () => {
   const { loading } = useContext(AuthContext);
@@ -11,7 +11,7 @@ const Root = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center mx-auto">
-        <Loader></Loader>
+        <div class="loader"><span></span><span></span><span></span></div>
       </div>
     );
   }
