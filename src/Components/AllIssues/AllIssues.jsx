@@ -5,11 +5,14 @@ import IssueDetails from "../Issue Deatils/IssueDetails";
 const AllIssues = () => {
   const issues = useLoaderData();
   console.log(issues);
+  if(!issues){
+    return <p>Loading...</p>
+  }
 
   return (
     <div className="max-w-6xl my-14 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {issues.map((issue) => (
-        <div className="card bg-white shadow-sm">
+        <div className="card bg-[#e7ecf9] shadow-sm">
           <img
             className="w-[400px] h-[300px] object-cover px-4 pt-4"
             src={issue.image}
@@ -29,7 +32,7 @@ const AllIssues = () => {
             </div>
             <Link
               to={`/issueDetails/${issue._id}`}
-              className="btn bg-black text-white btn-primary w-full">
+              className="bg-sky-950 text-center py-1 px-4 hover:cursor-pointer text-white w-full">
               See Details
             </Link>
           </div>

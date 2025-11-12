@@ -1,25 +1,153 @@
-import React from "react";
-import { useLoaderData, useParams } from "react-router";
+import React, { useRef } from "react";
+import { useLoaderData } from "react-router";
 
 const IssueDetails = () => {
-  const { id } = useParams();
   const issue = useLoaderData();
-  console.log("data", issue, "id", id);
-  const { title, image, location, description, date, category ,amount} = issue;
+  const modalRef = useRef();
+
+  const handleContribute = (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const title = form.title.value;
+    const amount = form.amount.value;
+    const name = form.name.value;
+    const email = form.email.value;
+    const phoneNumber = form.phoneNumber.value;
+    const address = form.address.value;
+    const info = form.info.value;
+    console.log(title, amount, name, email, phoneNumber, address, info);
+
+    fetch("http://localhost:3000/myContribution", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        amount: amount,
+        name: name,
+        email: email,
+        phoneNumber: phoneNumber,
+        address: address,
+        info: info,
+        date: new Date(),
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert("success", data);
+      });
+  };
+
+  const handleModal = () => {
+    modalRef.current.showModal();
+  };
+
+  const { title, image, location, description, category, amount } = issue;
   return (
     <div className="min-h-screen">
-      <div className="flex items-center justify-center gap-8 p-12">
-        <div className="min-w-[400px]">
-          <img src={image} alt="" />
+      <div className="flex justify-center gap-6 p-12">
+        <div>
+          <img
+            className="min-w-[400px] min-h-[500px] object-cover"
+            src={image}
+            alt=""
+          />
         </div>
         <div className="">
           <h1 className="text-2xl font-semibold">{title}</h1>
           <h2 className="font-semibold">{location}</h2>
           <p>{category}</p>
-          {/* <p >date:{newDate()}</p> */}
+
           <p className="mb-7">Amount: {amount} tk</p>
           <h2>{description}</h2>
-          <h2>{date}</h2>
+          <button
+            onClick={handleModal}
+            className="bg-sky-950 mt-6 py-2 px-8 hover:cursor-pointer text-white">
+            Pay Clean-Up Contribution
+          </button>
+
+          <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
+            <div className="modal-box bg-white">
+              <h3 className="font-bold text-2xl mb-6">
+                Thanks for your contribution
+              </h3>
+
+              <form onSubmit={handleContribute}>
+                <fieldset className="fieldset grid grid-cols-2 gap-6">
+                  <div>
+                    <label className="label">Issue Title</label>
+                    <input
+                      name="title"
+                      type="text"
+                      className="input border border-black/15 mb-2"
+                      placeholder="Issue title"
+                    />
+                    <label className="label mb-1">Amount</label>
+                    <input
+                      name="amount"
+                      type="text"
+                      className="input border border-black/15 mb-2"
+                      placeholder="Amount"
+                    />
+                    <label className="label mb-1">Name</label>
+                    <input
+                      name="name"
+                      type="name"
+                      className="input border border-black/15 mb-2"
+                      placeholder="Name"
+                    />
+                    <label className="label mb-1">Email</label>
+                    <input
+                      name="email"
+                      type="email"
+                      className="input border border-black/15 mb-2"
+                      placeholder="Email"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="label">Phone Number</label>
+                    <input
+                      name="phoneNumber"
+                      type="text"
+                      className="input border border-black/15 mb-2"
+                      placeholder="Phone number"
+                    />
+                    <label className="label mb-1">Address</label>
+                    <input
+                      name="address"
+                      type="text"
+                      className="input border border-black/15 mb-2"
+                      placeholder="address"
+                    />
+
+                    <label className="label mb-1">Additional info</label>
+                    <input
+                      name="info"
+                      type="text"
+                      className="input border border-black/15 mb-2"
+                      placeholder="Additional info"
+                    />
+                  </div>
+                </fieldset>
+
+                <button
+                  onSubmit={handleContribute}
+                  type="submit"
+                  className="btn bg-sky-700 mt-6 py-2 px-8 hover:cursor-pointer text-white">
+                  Submit
+                </button>
+              </form>
+              <div className="modal-action">
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button className="btn border-none">Close</button>
+                </form>
+              </div>
+            </div>
+          </dialog>
         </div>
       </div>
     </div>

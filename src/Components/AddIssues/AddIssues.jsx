@@ -17,19 +17,6 @@ const AddIssues = () => {
     const image = e.target.image.value;
     const amount = e.target.amount.value;
     const status = e.target.status.value;
-    const date = e.target.date.value;
-    // console.log(
-    //   'clicked',
-    //   title,
-    //   select,
-    //   location,
-    //   description,
-    //   email,
-    //   image,
-    //   amount,
-    //   status,
-    //   date
-    // );
 
     fetch("http://localhost:3000/allIssues", {
       method: "POST",
@@ -45,19 +32,21 @@ const AddIssues = () => {
         imageURL: image,
         amount: amount,
         status: status,
-        date: date,
+        date: new Date(),
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         toast.success("data added successfully");
-        console.log(data)
+        console.log(data);
       });
   };
 
   return (
     <div>
-      <div><Toaster/></div>
+      <div>
+        <Toaster />
+      </div>
       <div className="hero min-h-screen">
         <div className="flex-col lg:flex-row-reverse">
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -76,7 +65,7 @@ const AddIssues = () => {
                       className="my-1 p-1 border border-black/10 bg-white/30"
                     />
                     <fieldset className="fieldset">
-                      <legend className="fieldset-legend">Category</legend>
+                      <legend className="">Category</legend>
                       <select
                         name="select"
                         defaultValue="Select"
@@ -102,14 +91,14 @@ const AddIssues = () => {
                       type="text"
                       className="my-1 p-1 border border-black/10 bg-white/30"
                     />
+                  </div>
+                  <div>
                     <label className="text-[14px]">Email</label>
                     <input
                       name="email"
                       type="email"
                       className="my-1 p-1 border border-black/10 bg-white/30"
                     />
-                  </div>
-                  <div>
                     <label className="text-[14px]">Image</label>
                     <input
                       name="image"
@@ -128,17 +117,11 @@ const AddIssues = () => {
                       type="text"
                       className="my-1 p-1 border border-black/10 bg-white/30"
                     />
-                    <label className="text-[14px]">Date</label>
-                    <input
-                      name="date"
-                      type="text"
-                      className="my-1 p-1 border border-black/10 bg-white/30"
-                    />
                   </div>
                 </fieldset>
                 <button
                   type="submit"
-                  className="bg-sky-950 py-1 px-4 rounded-xl hover:cursor-pointer text-white">
+                  className="bg-sky-950 w-full py-1 px-4 hover:cursor-pointer text-white">
                   Add Issue
                 </button>
               </form>
