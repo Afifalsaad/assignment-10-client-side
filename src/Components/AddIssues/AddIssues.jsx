@@ -13,7 +13,6 @@ const AddIssues = () => {
     const select = e.target.select.value;
     const location = e.target.location.value;
     const description = e.target.description.value;
-    console.log(description)
     const email = e.target.email.value;
     const image = e.target.image.value;
     const amount = e.target.amount.value;
@@ -41,6 +40,7 @@ const AddIssues = () => {
         toast.success("data added successfully");
         console.log(data);
       });
+      e.target.reset()
   };
 
   return (

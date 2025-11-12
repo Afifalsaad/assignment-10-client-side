@@ -7,6 +7,14 @@ const MyIssues = () => {
   const modalRef = useRef();
   const [selectedIssue, setSelectedIssue] = useState([]);
 
+  useEffect(() => {
+    fetch(`http://localhost:3000/myIssues?email=${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setIssues(data);
+      });
+  }, [user]);
+
   const handleModal = (issue) => {
     setSelectedIssue(issue);
     console.log(issue);
@@ -48,18 +56,31 @@ const MyIssues = () => {
       });
   };
 
-  useEffect(() => {
-    fetch(`http://localhost:3000/myIssues?email=${user.email}`)
+  const handleDelete = (issue) => {
+    console.log("clicked");
+    console.log(issue._id);
+
+    fetch(`http://localhost:3000/addIssues/${issue._id}`, {
+      method: "DELETE",
+    })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setIssues(data);
+        console.log("after delete", data);
+        if (data.deletedCount) {
+          alert("Deleted");
+          setIssues((prevIssues) =>
+            prevIssues.filter((p) => p._id !== issue._id)
+          );
+        }
       });
-  }, [user]);
+  };
 
   return (
     <div>
-      <div className="overflow-x-auto bg-white/50 max-w-6xl mx-auto my-14">
+      <h1 className="text-center text-2xl font-bold my-7">
+        My Issues : <span className="text-[#0084d1]">{issues.length}</span>
+      </h1>
+      <div className="overflow-x-auto min-h-screen bg-white/50 max-w-6xl mx-auto mb-14">
         <table className="table">
           <thead>
             <tr>
@@ -103,12 +124,12 @@ const MyIssues = () => {
                 </td>
 
                 <td>
-                  <button className="bg-sky-950 mt-4 w-full py-1 px-1 hover:cursor-pointer text-white">
+                  <button
+                    onClick={() => handleDelete(issue)}
+                    className="bg-sky-950 mt-4 w-full py-1 px-1 hover:cursor-pointer text-white">
                     Delete
                   </button>
                 </td>
-
-                {/* Delete Button */}
               </tr>
             ))}
             {/* Drop Down */}
@@ -163,9 +184,7 @@ const MyIssues = () => {
                     </div>
                   </fieldset>
 
-                  <button
-                    //   onSubmit={handleContribute}
-                    className="btn bg-sky-700 mt-6 py-2 px-8 hover:cursor-pointer text-white">
+                  <button className="btn bg-sky-700 mt-6 py-2 px-8 hover:cursor-pointer text-white">
                     Submit
                   </button>
                 </form>
