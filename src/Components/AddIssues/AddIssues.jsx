@@ -1,5 +1,6 @@
-import React, { use } from "react";
+import React from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddIssues = () => {
   // const { user } = use(AuthContext);
@@ -49,12 +50,14 @@ const AddIssues = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        alert("data added successfully", data);
+        toast.success("data added successfully");
+        console.log(data)
       });
   };
 
   return (
     <div>
+      <div><Toaster/></div>
       <div className="hero min-h-screen">
         <div className="flex-col lg:flex-row-reverse">
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -80,9 +83,10 @@ const AddIssues = () => {
                         className="select bg-white/30">
                         <div className="bg-white">
                           <option>Select</option>
-                          <option>Chrome</option>
-                          <option>FireFox</option>
-                          <option>Safari</option>
+                          <option>Garbage</option>
+                          <option>Illegal Construction</option>
+                          <option>Road Damage</option>
+                          <option>Broken Public Property</option>
                         </div>
                       </select>
                     </fieldset>

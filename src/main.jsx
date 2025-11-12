@@ -14,6 +14,7 @@ import AddIssues from "./Components/AddIssues/AddIssues.jsx";
 import MyContribution from "./Components/MyContribution/MyContribution.jsx";
 import AllIssues from "./Components/AllIssues/AllIssues.jsx";
 import PrivateRoute from "./Provider/PrivateRoute.jsx";
+import IssueDetails from "./Components/Issue Deatils/IssueDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,13 @@ const router = createBrowserRouter([
             <AllIssues></AllIssues>
           </PrivateRoute>
         ),
+        loader:()=>fetch('http://localhost:3000/allIssues')
+      },
+      {
+        path:'/issueDetails/:id',
+        element:<PrivateRoute>
+          <IssueDetails></IssueDetails>
+        </PrivateRoute>
       },
       {
         path: "/myIssues",

@@ -4,7 +4,6 @@ import styled from "styled-components";
 const dataPromise = fetch("http://localhost:3000/categoryCards")
   .then((res) => res.json())
   .then((data) => {
-    console.log(data);
     return data;
   });
 
