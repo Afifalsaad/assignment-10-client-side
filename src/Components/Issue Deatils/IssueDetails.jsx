@@ -183,7 +183,7 @@ const IssueDetails = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {contributed.map((c , index) => (
+            {contributed.map((c, index) => (
               <tr>
                 <th>{index + 1}</th>
                 <td>

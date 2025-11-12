@@ -90,11 +90,7 @@ const AddIssues = () => {
                     <textarea className="bg-white" name="description" id="">
                       
                     </textarea>
-                    {/* <input
-                      name="description"
-                      type="text"
-                      className="my-1 p-1 border border-black/10 bg-white/30"
-                    /> */}
+                    
                   </div>
                   <div>
                     <label className="text-[14px]">Email</label>
