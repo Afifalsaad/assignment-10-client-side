@@ -29,7 +29,7 @@ const AllIssues = () => {
             </div>
             <Link
               to={`/issueDetails/${issue._id}`}
-              className="bg-[#97c09e] text-center py-1 px-4 hover:cursor-pointer text-white w-full">
+              className="bg-sky-950 mt-4 text-center py-2 px-4 hover:cursor-pointer text-white w-full">
               See Details
             </Link>
           </div>

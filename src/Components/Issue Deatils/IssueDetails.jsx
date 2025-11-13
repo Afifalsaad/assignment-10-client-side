@@ -3,21 +3,20 @@ import { useLoaderData } from "react-router";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const IssueDetails = () => {
-  const issue = useLoaderData();
+  const issues = useLoaderData();
   const modalRef = useRef();
   const { user } = use(AuthContext);
   const [contributed, setContributed] = useState([]);
-  const { title, image, location, description, category, amount, _id } = issue;
+  const { title, image, location, description, category, amount, _id } = issues;
 
   const handleModal = () => {
     modalRef.current.showModal();
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/allIssues/issue/${_id}`, {})
+    fetch(`http://localhost:3000/allIssues/issue/${_id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setContributed(data);
       });
   }, [_id]);
@@ -25,38 +24,40 @@ const IssueDetails = () => {
   const handleContribute = (e) => {
     e.preventDefault();
     const form = e.target;
+    console.log(user);
 
     const title = form.title.value;
     const amount = form.amount.value;
-    const name = form.name.value;
+    const name = user.displayName;
     const email = form.email.value;
     const phoneNumber = form.phoneNumber.value;
     const address = form.address.value;
     const info = form.info.value;
-    console.log(title, amount, name, email, phoneNumber, address, info);
+    const contribution = {
+      product_id: _id,
+      title: title,
+      amount: amount,
+      name: name,
+      email: email,
+      image: user.photoURL,
+      phoneNumber: phoneNumber,
+      address: address,
+      info: info,
+      date: new Date(),
+    };
 
     fetch("http://localhost:3000/contribution", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({
-        product_id: _id,
-        title: title,
-        amount: amount,
-        name: name,
-        email: email,
-        image: user.photoURL,
-        phoneNumber: phoneNumber,
-        address: address,
-        info: info,
-        date: new Date(),
-      }),
+      body: JSON.stringify(contribution),
     })
       .then((res) => res.json())
       .then(() => {
         modalRef.current.close();
         alert("Success");
+        setContributed((data) => [...data, contribution]);
       });
     form.reset();
   };
