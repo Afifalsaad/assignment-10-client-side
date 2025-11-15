@@ -15,7 +15,7 @@ const CategoryCards = () => {
   return (
     <div>
       <h1 className="text-center text-4xl font-bold text-sky-900">See all category</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-11/12 mx-auto my-14">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-11/12 mx-auto my-8 lg:my-14">
         {data1.map((d) => (
           <StyledWrapper>
             <h1 className="text-center text-sky-900">{d.category}</h1>

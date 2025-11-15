@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="w-10/12 mx-auto my-14">
+      <div className="w-10/12 mx-auto my-8 lg:my-14">
         <Swiper
           spaceBetween={50}
           centeredSlides={true}

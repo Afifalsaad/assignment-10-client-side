@@ -76,12 +76,13 @@ const IssueDetails = () => {
             alt=""
           />
         </div>
-        <div className="">
+        <div>
           <h1 className="text-2xl font-semibold">{title}</h1>
           <h2 className="font-semibold">{location}</h2>
           <p>{category}</p>
 
-          <p className="mb-7">Amount: {amount} tk</p>
+          <p>Amount: {amount} tk</p>
+          <p  className="mb-7">Date: {new Date().toLocaleDateString()}</p>
           <h2>{description}</h2>
           <button
             onClick={handleModal}

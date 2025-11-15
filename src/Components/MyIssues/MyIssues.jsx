@@ -135,69 +135,6 @@ const MyIssues = () => {
                 className="bg-red-600 text-white py-1 px-2 mt-2 rounded w-full">
                 Delete
               </button>
-              {/* // Modal */}
-              <dialog
-                ref={modalRef}
-                className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box bg-white">
-                  <h3 className="font-bold text-2xl mb-6">
-                    Update Your Selection
-                  </h3>
-
-                  <form onSubmit={handleUpdate}>
-                    <fieldset className="fieldset grid grid-cols-2 gap-6">
-                      <div>
-                        <label className="label">Title</label>
-                        <input
-                          defaultValue={selectedIssue.title}
-                          name="title"
-                          type="text"
-                          className="input w-full border border-black/15 mb-2"
-                          placeholder="Issue title"
-                        />
-                        <label className="label mb-1">Amount</label>
-                        <input
-                          defaultValue={selectedIssue.amount}
-                          name="amount"
-                          type="text"
-                          className="input border border-black/15 mb-2"
-                          placeholder="Amount"
-                        />
-                        <label className="label mb-1">Category</label>
-                        <input
-                          defaultValue={selectedIssue.category}
-                          name="category"
-                          type="name"
-                          className="input border border-black/15 mb-2"
-                          placeholder="Name"
-                        />
-                        <fieldset className="fieldset">
-                          <legend>Status</legend>
-                          <select
-                            name="status"
-                            defaultValue={selectedIssue.status}
-                            className="select bg-white/30">
-                            <div className="bg-white">
-                              <option>Select</option>
-                              <option>ongoing</option>
-                              <option>ended</option>
-                            </div>
-                          </select>
-                        </fieldset>
-                      </div>
-                    </fieldset>
-
-                    <button className="btn bg-sky-700 mt-6 py-2 px-8 hover:cursor-pointer text-white">
-                      Submit
-                    </button>
-                  </form>
-                  <div className="modal-action">
-                    <form method="dialog">
-                      <button className="btn border-none">Close</button>
-                    </form>
-                  </div>
-                </div>
-              </dialog>
             </div>
           ))}
         </div>
@@ -269,72 +206,68 @@ const MyIssues = () => {
                   ))}
                 </tbody>
               </table>
-              {/* Drop Down */}
-              <dialog
-                ref={modalRef}
-                className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box bg-white">
-                  <h3 className="font-bold text-2xl mb-6">
-                    Update Your Selection
-                  </h3>
-
-                  <form onSubmit={handleUpdate}>
-                    <fieldset className="fieldset grid grid-cols-2 gap-6">
-                      <div>
-                        <label className="label">Title</label>
-                        <input
-                          defaultValue={selectedIssue.title}
-                          name="title"
-                          type="text"
-                          className="input w-full border border-black/15 mb-2"
-                          placeholder="Issue title"
-                        />
-                        <label className="label mb-1">Amount</label>
-                        <input
-                          defaultValue={selectedIssue.amount}
-                          name="amount"
-                          type="text"
-                          className="input border border-black/15 mb-2"
-                          placeholder="Amount"
-                        />
-                        <label className="label mb-1">Category</label>
-                        <input
-                          defaultValue={selectedIssue.category}
-                          name="category"
-                          type="name"
-                          className="input border border-black/15 mb-2"
-                          placeholder="Name"
-                        />
-                        <fieldset className="fieldset">
-                          <legend>Status</legend>
-                          <select
-                            name="status"
-                            defaultValue={selectedIssue.status}
-                            className="select bg-white/30">
-                            <div className="bg-white">
-                              <option>Select</option>
-                              <option>ongoing</option>
-                              <option>ended</option>
-                            </div>
-                          </select>
-                        </fieldset>
-                      </div>
-                    </fieldset>
-
-                    <button className="btn bg-sky-700 mt-6 py-2 px-8 hover:cursor-pointer text-white">
-                      Submit
-                    </button>
-                  </form>
-                  <div className="modal-action">
-                    <form method="dialog">
-                      <button className="btn border-none">Close</button>
-                    </form>
-                  </div>
-                </div>
-              </dialog>
             </div>
           </div>
         )}
+
+        <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
+          <div className="modal-box bg-white">
+            <h3 className="font-bold text-2xl mb-6">Update Your Selection</h3>
+
+            <form onSubmit={handleUpdate}>
+              <fieldset className="fieldset grid grid-cols-2 gap-6">
+                <div>
+                  <label className="label">Title</label>
+                  <input
+                    defaultValue={selectedIssue.title}
+                    name="title"
+                    type="text"
+                    className="input w-full border border-black/15 mb-2"
+                    placeholder="Issue title"
+                  />
+                  <label className="label mb-1">Amount</label>
+                  <input
+                    defaultValue={selectedIssue.amount}
+                    name="amount"
+                    type="text"
+                    className="input border border-black/15 mb-2"
+                    placeholder="Amount"
+                  />
+                  <label className="label mb-1">Category</label>
+                  <input
+                    defaultValue={selectedIssue.category}
+                    name="category"
+                    type="name"
+                    className="input border border-black/15 mb-2"
+                    placeholder="Name"
+                  />
+                  <fieldset className="fieldset">
+                    <legend>Status</legend>
+                    <select
+                      name="status"
+                      defaultValue={selectedIssue.status}
+                      className="select bg-white/30">
+                      <div className="bg-white">
+                        <option>Select</option>
+                        <option>ongoing</option>
+                        <option>ended</option>
+                      </div>
+                    </select>
+                  </fieldset>
+                </div>
+              </fieldset>
+
+              <button className="btn bg-sky-700 mt-6 py-2 px-8 hover:cursor-pointer text-white">
+                Submit
+              </button>
+            </form>
+            <div className="modal-action">
+              <form method="dialog">
+                <button className="btn border-none">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </div>
     </div>
   );
