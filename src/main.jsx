@@ -17,6 +17,9 @@ import PrivateRoute from "./Provider/PrivateRoute.jsx";
 import IssueDetails from "./Components/Issue Deatils/IssueDetails.jsx";
 import { ThemeProvider } from "next-themes";
 import ErrorPage from "./Components/Pages/ErrorPage.jsx";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -64,6 +67,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyIssues></MyIssues>
+            //{" "}
           </PrivateRoute>
         ),
       },
@@ -93,8 +97,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router}></RouterProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>
 );

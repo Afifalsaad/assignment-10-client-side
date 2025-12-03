@@ -26,7 +26,7 @@ const Login = () => {
         navigate(`${location.state ? location.state : "/"}`);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         {
           Swal.fire({
             title: "Login Error",

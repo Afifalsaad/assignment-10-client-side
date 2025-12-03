@@ -1,25 +1,37 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const MyIssues = () => {
   const { user } = useContext(AuthContext);
-  const [issues, setIssues] = useState([]);
+  const axiosSecure = useAxiosSecure();
+  // const [issues, setIssues] = useState([]);
   const modalRef = useRef();
   const [selectedIssue, setSelectedIssue] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch(
-      `https://assignment-10-server-jet-nine.vercel.app/myIssues?email=${user.email}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setIssues(data);
-        setLoading(false);
-      });
-  }, [user]);
+  const { data: issues = [] } = useQuery({
+    queryKey: ["myIssues", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/myIssues?email=${user.email}`);
+      setLoading(false);
+      return res.data;
+    },
+  });
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   fetch(
+  //     `https://assignment-10-server-jet-nine.vercel.app/myIssues?email=${user?.email}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setIssues(data);
+  //       setLoading(false);
+  //     });
+  // }, [user]);
 
   const handleModal = (issue) => {
     setSelectedIssue(issue);
@@ -59,7 +71,7 @@ const MyIssues = () => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
               Swal.fire("Saved!", "", "success");
-              setIssues((prevIssues) =>
+              issues((prevIssues) =>
                 prevIssues.map((issue) =>
                   issue._id === selectedIssue._id
                     ? { ...issue, ...updatedData }
@@ -100,7 +112,7 @@ const MyIssues = () => {
                 text: "Your file has been deleted.",
                 icon: "success",
               });
-              setIssues((prevIssues) =>
+              issues((prevIssues) =>
                 prevIssues.filter((p) => p._id !== issue._id)
               );
             }
@@ -123,8 +135,8 @@ const MyIssues = () => {
               <p className="font-bold">
                 {index + 1}. {issue.title}
               </p>
-              <p>Status: {issue.status}</p>
-              <p>Name: {user.displayName}</p>
+              <p>Status: Status</p>
+              <p>Name: {user?.displayName}</p>
               <button
                 onClick={() => handleModal(issue)}
                 className=" py-1 px-2 mt-2 rounded w-full">
@@ -173,14 +185,14 @@ const MyIssues = () => {
                           <div className="avatar">
                             <div className="mask mask-squircle h-12 w-12">
                               <img
-                                src={user.photoURL}
+                                src={user?.photoURL}
                                 alt="Avatar Tailwind CSS Component"
                               />
                             </div>
                           </div>
                         </div>
                       </td>
-                      <td>{user.displayName}</td>
+                      <td>{user?.displayName}</td>
                       <td>
                         {issue.title}
                         <br />

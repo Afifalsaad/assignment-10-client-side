@@ -7,7 +7,7 @@ import "./root.css";
 
 const Root = () => {
   const location = useLocation();
-  const {loading} = use(AuthContext)
+  const { loading } = use(AuthContext);
 
   useEffect(() => {
     const path = location.pathname;
@@ -32,13 +32,15 @@ const Root = () => {
   });
 
   if (loading) {
-    return <div className="min-h-screen flex justify-center items-center mx-auto">
-      <div class="loader">
-        <span></span>
-        <span></span>
-        <span></span>
+    return (
+      <div className="min-h-screen flex justify-center items-center mx-auto">
+        <div className="loader">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
-    </div>;
+    );
   }
 
   return (

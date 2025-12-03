@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { useContext, useState } from "react";
 import icon from "../../assets/icons8-earth-48.png";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -6,7 +6,7 @@ import { RxAvatar } from "react-icons/rx";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const { user, logOut } = use(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [logout, setLogout] = useState(true);
 
   const handleLogout = () => {
